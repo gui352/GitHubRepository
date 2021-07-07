@@ -1,6 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { Title, Repositories, Form } from './styles';
 import api from '../../services/api';
+import { FiChevronRight } from 'react-icons/fi';
 
 interface Repository{
   full_name: string;
@@ -12,7 +13,7 @@ interface Repository{
 }
 
 const Dashboard: React.FC = () => {
-  const[newRepo, setNewrepo] = useState('');
+  const[newRepo, setNewRepo] = useState('');
   const[repositories, setRepositories] = useState<Repository[]>([]);
 
   async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void>{
@@ -22,6 +23,7 @@ const Dashboard: React.FC = () => {
       const repository = response.data;
 
       setRepositories([...repositories, repository]);
+      setNewRepo('');
   }
 
   return (
@@ -29,24 +31,73 @@ const Dashboard: React.FC = () => {
       <Title>Explore repositórios no GitHub</Title>
 
       <Form onSubmit={handleAddRepository}>
-        <input onChange={e => setNewrepo(e.target.value)} placeholder="Digite o nome do repositório" value={newRepo}/>
+        <input onChange={e => setNewRepo(e.target.value)} placeholder="Digite o nome do repositório" value={newRepo}/>
         <button type="submit">Pesquisar</button>
       </Form>
 
       <Repositories>
 
-        {repositories.map(repository => (
-        <>
-          <img
-            src={repository.owner.avatar_url}
-            alt={repository.owner.login}
-          />
-          <div>
-            <strong>{repository.full_name}</strong>
-            <p>{repository.description}</p>
-          </div>
-        </>
-        ))}
+        {/**repositories.map(repository => (
+        <a key={repository.full_name} href="teste">
+            <img
+              src={repository.owner.avatar_url}
+              alt={repository.owner.login}
+            />
+            <div>
+              <strong>{repository.full_name}</strong>
+              <p>{repository.description}</p>
+            </div>
+        </a>
+        ))**/}
+
+        <a href="teste">
+            <img
+              src="https://avatars.githubusercontent.com/u/80405961?v=4"
+              alt="Guilherme"
+            />
+            <div>
+              <strong>ProjetoLoja</strong>
+              <p>Sistema de cadastro, edição, exclusão e listagem de produtos. Desenvolvido em Java</p>
+            </div>
+            <FiChevronRight size={20}/>
+        </a>
+
+        <a href="teste">
+            <img
+              src="https://avatars.githubusercontent.com/u/80405961?v=4"
+              alt="Guilherme"
+            />
+            <div>
+              <strong>ProjetoLoja</strong>
+              <p>Sistema de cadastro, edição, exclusão e listagem de produtos. Desenvolvido em Java</p>
+            </div>
+            <FiChevronRight size={20}/>
+        </a>
+
+        <a href="teste">
+            <img
+              src="https://avatars.githubusercontent.com/u/80405961?v=4"
+              alt="Guilherme"
+            />
+            <div>
+              <strong>ProjetoLoja</strong>
+              <p>Sistema de cadastro, edição, exclusão e listagem de produtos. Desenvolvido em Java</p>
+            </div>
+            <FiChevronRight size={20}/>
+        </a>
+
+        <a href="teste">
+            <img
+              src="https://avatars.githubusercontent.com/u/80405961?v=4"
+              alt="Guilherme"
+            />
+            <div>
+              <strong>ProjetoLoja</strong>
+              <p>Sistema de cadastro, edição, exclusão e listagem de produtos. Desenvolvido em Java</p>
+            </div>
+            <FiChevronRight size={20}/>
+        </a>
+
       </Repositories>
     </>
   );
